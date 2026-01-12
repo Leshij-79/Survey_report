@@ -40,12 +40,12 @@ def data_processing(data: list[dict]) -> list[dict]:
         temp_tech = item["tech"]
         temp_os = temp_tech["os"]["linux"]
         temp_data_dict["Операционная система"] = (
-            f"ОС - {temp_os['name']}\n" f'Версия - {temp_os["version"]}\n' f"Ядро - {temp_os['kernel']}"
+            f"ОС - {temp_os['name']}\n" f'Версия - {temp_os["version"]}\n' f"Ядро - {temp_os["kernel"]}"
         )
         temp_data_dict["Процессор"] = temp_tech["cpu"][0]
         temp_data_dict["Видеоадаптер"] = temp_tech["videoadapter"][0]
         temp_data_dict["Материнская плата"] = (
-            f"Вендор - {temp_tech['motherboard']['vendor']}\n" f'Модель - {temp_tech['motherboard']["model"]}'
+            f"Вендор - {temp_tech["motherboard"]["vendor"]}\n" f'Модель - {temp_tech["motherboard"]["model"]}'
         )
         temp_data_dict["Оперативная память"] = temp_tech["ram"]
         temp_disks = ""
@@ -66,8 +66,8 @@ def data_processing(data: list[dict]) -> list[dict]:
         for item_lan in item["interfaces"]:
             temp_lan += (
                 f'Имя - {item_lan["name"]}\n'
-                f'IP-адрес {item_lan["ips"][0]['address']}\n'
-                f'Подсеть - {item_lan["ips"][0]['subnet']}\n'
+                f'IP-адрес {item_lan["ips"][0]["address"]}\n'
+                f'Подсеть - {item_lan["ips"][0]["subnet"]}\n'
                 f'MAC-адрес - {item_lan["mac"]}\n'
             )
             temp_lan += "Активен\n" if item_lan["is_active"] else "Не активен\n"
