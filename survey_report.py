@@ -8,6 +8,7 @@ import pandas as pd
 def load_data_json(path_dir: str) -> list[dict[str, Any]]:
     path_files = os.path.join(os.path.dirname(__file__), path_dir)
     list_files = os.listdir(path_files)
+    
     data = []
     for file_name in list_files:
         path_file = os.path.join(path_files, file_name)
@@ -48,6 +49,7 @@ def data_processing(data: list[dict]) -> list[dict]:
             f"Вендор - {temp_tech["motherboard"]["vendor"]}\n" f'Модель - {temp_tech["motherboard"]["model"]}'
         )
         temp_data_dict["Оперативная память"] = temp_tech["ram"]
+        
         temp_disks = ""
         for_disk = temp_tech["disk"]
         for item_disk in for_disk:
@@ -62,6 +64,7 @@ def data_processing(data: list[dict]) -> list[dict]:
                 temp_disks += "Cъёмный\n" if item_disk["is_removable"] else "Не съёмный\n"
         temp_data_dict["Носители"] = temp_disks[: len(temp_disks) - 1]
         temp_data_dict["Монитор"] = item["per"]["monitor"]
+        
         temp_lan = ""
         for item_lan in item["interfaces"]:
             temp_lan += (
