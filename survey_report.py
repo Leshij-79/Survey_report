@@ -64,12 +64,18 @@ def data_processing(data: list[dict]) -> list[dict]:
         temp_data_dict["Монитор"] = item["per"]["monitor"]
         temp_lan = ""
         for item_lan in item["interfaces"]:
-            temp_lan += (
-                f'Имя - {item_lan["name"]}\n'
-                f'IP-адрес {item_lan["ips"][0]["address"]}\n'
-                f'Подсеть - {item_lan["ips"][0]["subnet"]}\n'
-                f'MAC-адрес - {item_lan["mac"]}\n'
-            )
+            if item_lan["is_active"]:
+                temp_lan += (
+                    f'Имя - {item_lan["name"]}\n'
+                    f'IP-адрес {item_lan["ips"][0]["address"]}\n'
+                    f'Подсеть - {item_lan["ips"][0]["subnet"]}\n'
+                    f'MAC-адрес - {item_lan["mac"]}\n'
+                )
+            else:
+                temp_lan += (
+                    f'Имя - {item_lan["name"]}\n'
+                    f'MAC-адрес - {item_lan["mac"]}\n'
+                )
             temp_lan += "Активен\n" if item_lan["is_active"] else "Не активен\n"
         temp_data_dict["Сетевой интерфейс"] = temp_lan[: len(temp_lan) - 1]
         temp_data.append(temp_data_dict)
